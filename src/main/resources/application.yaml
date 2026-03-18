@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: suggestions
+  elasticsearch:
+    uris:
+      - http://localhost:9200
