@@ -31,7 +31,7 @@ public class SearchService {
     public SearchResponse search(SearchRequestParameters parameters) {
         log.info("search request: {}", parameters);
 
-        var query = NativeQueryBuilder.toSuggestQuery(parameters);
+        var query = NativeQueryBuilder.toSearchQuery(parameters);
         log.info("bool query: {}", query.getQuery());
 
         var searchHits = elasticsearchOperations.search(query, Business.class, Constants.Index.BUSINESS);
@@ -52,7 +52,7 @@ public class SearchService {
                 searchPage.getTotalPages()
         );
 
-        var facets = buildFacets((List<ElasticsearchAggregation) searchHits.getAggregations().aggregations());
+        var facets = buildFacets((List<ElasticsearchAggregation>) searchHits.getAggregations().aggregations());
 
         return new SearchResponse(
                 results,
